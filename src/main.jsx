@@ -4,7 +4,7 @@ import './index.css';
 import { GameContainer } from './components/Game/GameContainer';
 
 createRoot(document.getElementById('root')).render(
-	<StrictMode>
+	// <StrictMode>
 		<GameContainer />
-	</StrictMode>
+	// </StrictMode>
 );

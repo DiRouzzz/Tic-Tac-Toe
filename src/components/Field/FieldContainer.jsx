@@ -1,4 +1,5 @@
 import { FieldLayout } from './FieldLayout';
+import PropTypes from 'prop-types';
 
 const WIN_PATTERNS = [
 	[0, 1, 2],
@@ -13,40 +14,13 @@ const WIN_PATTERNS = [
 
 export const FieldContainer = ({
 	field,
+	setField,
 	currentPlayer,
 	setCurrentPlayer,
-	setField,
 	isGameEnded,
 	setIsGameEnded,
-	isDraw,
-	setIsDraw,
-	statusGame,
 	setStatusGame,
 }) => {
-	// WIN_PATTERNS.forEach(patterns => {
-	// 	const [a, b, c] = patterns;
-	// 	if (field[a] && field[b] && field[c] === currentPlayer) {
-	// 		console.log(`wins ${currentPlayer}`);
-	// 		setIsGameEnded(true);
-	// 	} else {
-	// 		// setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
-	// 	}
-	// });
-	// const onClickCell = indexCell => {
-	// 	// if(isGameEnded){
-	// 	// 	return;
-	// 	// }
-	// 	if (field[indexCell] === '') {
-	// 		console.log('Зашел');
-
-	// 		setField(prevField => {
-	// 			const newField = [...prevField];
-	// 			newField[indexCell] = currentPlayer;
-	// 			return newField;
-	// 		});
-	// 	}
-	// };
-
 	const checkWin = field => {
 		return WIN_PATTERNS.some(pattern => {
 			const [a, b, c] = pattern;
@@ -54,21 +28,13 @@ export const FieldContainer = ({
 		});
 	};
 
-	// Функция для проверки ничьи
 	const isDrawStatus = field => {
 		return field.every(cell => cell !== '') && !checkWin(field);
 	};
 
-	// const isDrawStatus = field.every(cell => cell !== '') && !checkWin(field);
-	// console.log('isDrawStatus', isDrawStatus);
-
-	// if(isDrawStatus){
-	// 	setIsDraw(true);
-	// }
-
 	const onClickCell = indexCell => {
 		if (isGameEnded) {
-			return; 
+			return;
 		}
 
 		if (field[indexCell] === '') {
@@ -76,15 +42,11 @@ export const FieldContainer = ({
 			newField[indexCell] = currentPlayer;
 			setField(newField);
 
-			// Проверяем, есть ли победитель
 			if (checkWin(newField)) {
-				console.log(`Победил игрок: ${currentPlayer}`);
 				setStatusGame(`Победил игрок: ${currentPlayer}`);
 				setIsGameEnded(true);
 			} else if (isDrawStatus(newField)) {
-				console.log('Ничья!');
-				setStatusGame('Ничья!')
-				setIsDraw(true);
+				setStatusGame('Ничья!');
 				setIsGameEnded(true);
 			} else {
 				setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
@@ -92,10 +54,15 @@ export const FieldContainer = ({
 		}
 	};
 
-	return (
-		<FieldLayout
-			field={field}
-			onClickCell={onClickCell}
-		/>
-	);
+	return <FieldLayout field={field} onClickCell={onClickCell} />;
+};
+
+FieldContainer.propTypes = {
+	field: PropTypes.arrayOf(PropTypes.string).isRequired,
+	setField: PropTypes.func.isRequired,
+	currentPlayer: PropTypes.oneOf(['X', 'O']).isRequired,
+	setCurrentPlayer: PropTypes.func.isRequired,
+	isGameEnded: PropTypes.bool.isRequired,
+	setIsGameEnded: PropTypes.func.isRequired,
+	setStatusGame: PropTypes.func.isRequired,
 };

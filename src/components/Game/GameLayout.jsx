@@ -12,8 +12,6 @@ export const GameLayout = ({
 	setField,
 	isGameEnded,
 	setIsGameEnded,
-	isDraw,
-	setIsDraw,
 	onClickResetGame,
 }) => {
 	return (
@@ -31,9 +29,6 @@ export const GameLayout = ({
 					setField={setField}
 					isGameEnded={isGameEnded}
 					setIsGameEnded={setIsGameEnded}
-					isDraw={isDraw}
-					setIsDraw={setIsDraw}
-					statusGame={statusGame}
 					setStatusGame={setStatusGame}
 				/>
 				<button onClick={onClickResetGame}>🔄 Начать заново</button>
@@ -50,7 +45,14 @@ export const GameLayout = ({
 	);
 };
 
-// GameLayout.propTypes = {
-// 	field: PropTypes.string,
-// 	statusGame: PropTypes.string,
-// };
+GameLayout.propTypes = {
+	field: PropTypes.arrayOf(PropTypes.string).isRequired,
+	statusGame: PropTypes.string.isRequired,
+	currentPlayer: PropTypes.oneOf(['X', 'O']).isRequired,
+	isGameEnded: PropTypes.bool.isRequired,
+	onClickResetGame: PropTypes.func.isRequired,
+	setStatusGame: PropTypes.func.isRequired,
+	setCurrentPlayer: PropTypes.func.isRequired,
+	setField: PropTypes.func.isRequired,
+	setIsGameEnded: PropTypes.func.isRequired,
+};

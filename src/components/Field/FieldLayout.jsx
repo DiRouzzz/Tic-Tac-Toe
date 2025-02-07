@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styles from './field.module.css';
 
 export const FieldLayout = ({ field, onClickCell }) => {
@@ -19,4 +20,9 @@ export const FieldLayout = ({ field, onClickCell }) => {
 			<div className={styles.board}>{fieldMapping}</div>
 		</>
 	);
+};
+
+FieldLayout.propTypes = {
+	field: PropTypes.arrayOf(PropTypes.string).isRequired,
+	onClickCell: PropTypes.func.isRequired,
 };
