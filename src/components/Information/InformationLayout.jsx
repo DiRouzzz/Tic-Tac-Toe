@@ -1,14 +1,14 @@
 import styles from './information.module.css';
 
-export const InformationLayout = ({ isDrawStatus }) => {
+export const InformationLayout = ({ statusGame, currentPlayer }) => {
 	return (
 		<>
 			<div className={styles.status}>
 				<div>
-					Ход: <span>X</span>
+					Ход: <span>{currentPlayer}</span>
 				</div>
 				<div>
-					Статус: <span>{isDrawStatus}</span>
+					Статус: <span>{statusGame}</span>
 				</div>
 			</div>
 		</>

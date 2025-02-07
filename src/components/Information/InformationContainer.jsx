@@ -1,5 +1,5 @@
 import { InformationLayout } from './InformationLayout';
 
-export const InformationContainer = ({isDrawStatus}) => {
-	return <InformationLayout isDrawStatus={isDrawStatus}/>;
+export const InformationContainer = ({ statusGame, currentPlayer }) => {
+	return <InformationLayout statusGame={statusGame} currentPlayer={currentPlayer} />;
 };
