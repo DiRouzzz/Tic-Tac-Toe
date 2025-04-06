@@ -1,5 +1,4 @@
 import styles from './information.module.css';
-import PropTypes from 'prop-types';
 
 export const InformationLayout = ({ statusGame, currentPlayer }) => {
 	return (
@@ -16,7 +15,4 @@ export const InformationLayout = ({ statusGame, currentPlayer }) => {
 	);
 };
 
-InformationLayout.propTypes = {
-	statusGame: PropTypes.string.isRequired,
-	currentPlayer: PropTypes.oneOf(['X', 'O']).isRequired,
-};
+

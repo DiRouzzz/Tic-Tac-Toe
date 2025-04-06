@@ -1,17 +1,12 @@
 import styles from './game.module.css';
 import { InformationContainer } from '../Information/InformationContainer';
 import { FieldContainer } from '../Field/FieldContainer';
-import PropTypes from 'prop-types';
 
 export const GameLayout = ({
 	field,
 	statusGame,
-	setStatusGame,
 	currentPlayer,
-	setCurrentPlayer,
-	setField,
 	isGameEnded,
-	setIsGameEnded,
 	onClickResetGame,
 }) => {
 	return (
@@ -24,12 +19,6 @@ export const GameLayout = ({
 				/>
 				<FieldContainer
 					field={field}
-					currentPlayer={currentPlayer}
-					setCurrentPlayer={setCurrentPlayer}
-					setField={setField}
-					isGameEnded={isGameEnded}
-					setIsGameEnded={setIsGameEnded}
-					setStatusGame={setStatusGame}
 				/>
 				<button onClick={onClickResetGame}>🔄 Начать заново</button>
 			</div>
@@ -45,14 +34,4 @@ export const GameLayout = ({
 	);
 };
 
-GameLayout.propTypes = {
-	field: PropTypes.arrayOf(PropTypes.string).isRequired,
-	statusGame: PropTypes.string.isRequired,
-	currentPlayer: PropTypes.oneOf(['X', 'O']).isRequired,
-	isGameEnded: PropTypes.bool.isRequired,
-	onClickResetGame: PropTypes.func.isRequired,
-	setStatusGame: PropTypes.func.isRequired,
-	setCurrentPlayer: PropTypes.func.isRequired,
-	setField: PropTypes.func.isRequired,
-	setIsGameEnded: PropTypes.func.isRequired,
-};
+

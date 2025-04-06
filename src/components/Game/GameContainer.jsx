@@ -1,30 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { GameLayout } from './GameLayout';
+import { store } from '../../reducer';
 
 export const GameContainer = () => {
-	const [currentPlayer, setCurrentPlayer] = useState('X');
-	const [isGameEnded, setIsGameEnded] = useState(false);
-	const [field, setField] = useState(['', '', '', '', '', '', '', '', '']);
-	const [statusGame, setStatusGame] = useState('');
+	const [_, setRender] = useState(0);
 
-	const onClickResetGame = () => {
-		setCurrentPlayer('X');
-		setIsGameEnded(false);
-		setField(['', '', '', '', '', '', '', '', '']);
-		setStatusGame('');
-	};
+	useEffect(() => store.subscribe(() => setRender(r => r + 1)), []);
+
+	const { field, currentPlayer, isGameEnded, statusGame } = store.getState();
 
 	return (
 		<GameLayout
 			field={field}
-			setField={setField}
 			statusGame={statusGame}
-			setStatusGame={setStatusGame}
 			currentPlayer={currentPlayer}
-			setCurrentPlayer={setCurrentPlayer}
 			isGameEnded={isGameEnded}
-			setIsGameEnded={setIsGameEnded}
-			onClickResetGame={onClickResetGame}
+			onClickResetGame={() => store.dispatch({ type: 'RESET' })}
 		/>
 	);
 };
