@@ -1,13 +1,11 @@
 import { FieldLayout } from './FieldLayout';
-import { store } from '../../reducer';
+import { store } from '../../store';
 
 export function FieldContainer({ field }) {
-	return (
-		<FieldLayout
-			field={field}
-			onClickCell={index => store.dispatch({ type: 'MOVE', index })}
-		/>
-	);
+  return (
+    <FieldLayout
+      field={field}
+      onClickCell={(index) => store.dispatch({ type: 'MOVE', index })}
+    />
+  );
 }
-
-

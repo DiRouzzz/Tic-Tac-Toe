@@ -1,21 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useReducer } from 'react';
 import { GameLayout } from './GameLayout';
-import { store } from '../../reducer';
+import { store } from '../../store';
 
 export const GameContainer = () => {
-	const [_, setRender] = useState(0);
+  const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
-	useEffect(() => store.subscribe(() => setRender(r => r + 1)), []);
+  useEffect(() => {
+    const unsubscribe = store.subscribe(() => {
+      forceUpdate();
+    });
 
-	const { field, currentPlayer, isGameEnded, statusGame } = store.getState();
+    return unsubscribe;
+  }, []);
 
-	return (
-		<GameLayout
-			field={field}
-			statusGame={statusGame}
-			currentPlayer={currentPlayer}
-			isGameEnded={isGameEnded}
-			onClickResetGame={() => store.dispatch({ type: 'RESET' })}
-		/>
-	);
+  const { field, currentPlayer, isGameEnded, statusGame } = store.getState();
+
+  return (
+    <GameLayout
+      field={field}
+      statusGame={statusGame}
+      currentPlayer={currentPlayer}
+      isGameEnded={isGameEnded}
+      onClickResetGame={() => store.dispatch({ type: 'RESET' })}
+    />
+  );
 };
