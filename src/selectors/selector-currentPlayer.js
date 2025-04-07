@@ -1,1 +1,1 @@
-export  const selectorCurrentPlayer = (state) => state.currentPlayer;
+export const selectorCurrentPlayer = (state) => state.currentPlayer;
