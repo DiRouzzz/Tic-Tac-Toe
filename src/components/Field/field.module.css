@@ -33,13 +33,13 @@
   cursor: not-allowed;
 }
 
-.cell[data-value="X"] {
+.cell[data-value='X'] {
   font-size: 90px;
   color: #ff4757;
   text-shadow: 2px 2px 5px rgba(255, 71, 87, 0.5);
 }
 
-.cell[data-value="O"] {
+.cell[data-value='O'] {
   font-size: 90px;
   color: #1e90ff;
   text-shadow: 2px 2px 5px rgba(30, 144, 255, 0.5);
