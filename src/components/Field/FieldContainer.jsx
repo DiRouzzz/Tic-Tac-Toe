@@ -1,11 +1,12 @@
 import { FieldLayout } from './FieldLayout';
-import { store } from '../../store';
+import { useDispatch } from 'react-redux';
 
 export function FieldContainer({ field }) {
+  const dispatch = useDispatch();
   return (
     <FieldLayout
       field={field}
-      onClickCell={(index) => store.dispatch({ type: 'MOVE', index })}
+      onClickCell={(index) => dispatch({ type: 'MOVE', payload: index })}
     />
   );
 }

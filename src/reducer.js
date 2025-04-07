@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   currentPlayer: 'X',
   isGameEnded: false,
   field: Array(9).fill(''),
@@ -8,10 +8,12 @@ const initialState = {
 export function gameReducer(state = initialState, action) {
   switch (action.type) {
     case 'MOVE':
-      if (state.isGameEnded || state.field[action.index]) return state;
+      if (state.isGameEnded || state.field[action.payload]) {
+        return state;
+      }
 
       const newField = [...state.field];
-      newField[action.index] = state.currentPlayer;
+      newField[action.payload] = state.currentPlayer;
 
       const winner = checkWin(newField);
       const isDraw = newField.every((cell) => cell) && !winner;
@@ -24,7 +26,7 @@ export function gameReducer(state = initialState, action) {
           : state.currentPlayer === 'X'
             ? 'O'
             : 'X',
-        isGameEnded: Boolean(winner || isDraw),
+        isGameEnded: winner || isDraw,
         statusGame: winner
           ? `Победил игрок: ${state.currentPlayer}`
           : isDraw

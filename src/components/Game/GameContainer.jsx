@@ -1,19 +1,19 @@
-import { useEffect, useReducer } from 'react';
 import { GameLayout } from './GameLayout';
-import { store } from '../../store';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectorField,
+  selectorCurrentPlayer,
+  selectorIsGameEnded,
+  selectorStatusGame,
+} from '../../selectors';
 
 export const GameContainer = () => {
-  const [, forceUpdate] = useReducer((x) => x + 1, 0);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    const unsubscribe = store.subscribe(() => {
-      forceUpdate();
-    });
-
-    return unsubscribe;
-  }, []);
-
-  const { field, currentPlayer, isGameEnded, statusGame } = store.getState();
+  const field = useSelector(selectorField);
+  const currentPlayer = useSelector(selectorCurrentPlayer);
+  const isGameEnded = useSelector(selectorIsGameEnded);
+  const statusGame = useSelector(selectorStatusGame);
 
   return (
     <GameLayout
@@ -21,7 +21,7 @@ export const GameContainer = () => {
       statusGame={statusGame}
       currentPlayer={currentPlayer}
       isGameEnded={isGameEnded}
-      onClickResetGame={() => store.dispatch({ type: 'RESET' })}
+      onClickResetGame={() => dispatch({ type: 'RESET' })}
     />
   );
 };
